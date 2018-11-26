@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -38,7 +39,7 @@ const routes: Routes = [
     ItemListComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
