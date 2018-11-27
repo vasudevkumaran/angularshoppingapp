@@ -10,6 +10,8 @@ import { AddEditComponent } from './add-edit/add-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NotExistingComponent } from './not-existing/not-existing.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { AppService } from './app.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -39,10 +41,10 @@ const routes: Routes = [
     ItemListComponent
   ],
   imports: [
-    BrowserModule,FormsModule,
+    BrowserModule,FormsModule,HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
