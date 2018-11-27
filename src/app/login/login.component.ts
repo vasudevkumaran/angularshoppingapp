@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from '../app.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit,OnDestroy {
   public loginObj:any = {username:"",password:""};
   private submitObj:Subscription;
-  constructor(private srv:AppService) { }
+  private message:string = "";
+  constructor(private srv:AppService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -23,8 +25,18 @@ export class LoginComponent implements OnInit,OnDestroy {
 
   public onFormSubmit(){
     console.log(this.loginObj);
-    this.submitObj = this.srv.sendToServer('http://vasudevkumaran.com/ang/login',this.loginObj).subscribe((result) => {
-        console.log(result);
+    this.message = "processing...."
+    this.submitObj = this.srv.sendToServer('http://vasudevkumaran.com/ang/login',this.loginObj).subscribe((data) => {
+        console.log(data);
+        if (data.result == 'OK'){
+          //login success
+          this.message = data.message;
+          this.router.navigate(['main']);
+        }else{
+          //login failed
+          this.message = "login failed";
+        }
+
     });
   }
 
